@@ -1,57 +1,10 @@
 import React, { useState } from "react";
 import "./Home.css";
+import { useForm } from "../../hooks/useForm";
 
 const Home = () => {
-  const [setData, setSetData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    password: "",
-  });
 
-
-  
-  // taking value from input from
-  const handleStore = (e) => {
-    const { name, value } = e.target;
-
-    setSetData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  let validPhone =setData.phone.length;  // taking integer lenght in input[type=number];
-
-  if (validPhone > 10) {
-    alert("maxximum  number is 10");
-    setData.phone = "";
-  }
-  
-  
-
-//for checking validation of email
-const isValid=()=> {
-    let validEmail= setData.email
-    return /\S+@\S+\.\S+/.test(validEmail);
-}
-
-  // storing in local storage
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    if ( validPhone !== 10 || !isValid(e.target.value) )  {
-      alert("please check above information and enter correctly ");
-    } else {
-      localStorage.setItem("setData", JSON.stringify(setData));
-      setSetData({
-        name: "",
-        phone: "",
-        email: "",
-        password: "",
-      });
-    }
-  };
+  const {handleStore , handleSubmit , data } = useForm(); 
 
   return (
     <div className="main">
@@ -67,7 +20,7 @@ const isValid=()=> {
               type="text"
               name="name"
               className="f_name"
-              value={setData.name}
+              value={data.name}
               onChange={handleStore}
               required
             />
@@ -79,7 +32,7 @@ const isValid=()=> {
               type="number"
               name="phone"
               className="U_number"
-              value={setData.phone}
+              value={data.phone}
               onChange={handleStore}
               required
             />
@@ -92,7 +45,7 @@ const isValid=()=> {
               type="email"
               name="email"
               className="Mail"
-              value={setData.email}
+              value={data.email}
               onChange={handleStore}
               required
             />
@@ -107,7 +60,7 @@ const isValid=()=> {
               type="password"
               name="password"
               className="Key"
-              value={setData.password}
+              value={data.password}
               onChange={handleStore}
               required
             />
