@@ -1,0 +1,14 @@
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    if (setData.phone.length !== 10) {
+      alert("number should be 10 ");
+    } else {
+      localStorage.setItem("setData", JSON.stringify(setData));
+      setSetData({
+        name: "",
+        phone: "",
+        email: "",
+        password: "",
+      });
+    }
+  };
